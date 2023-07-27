@@ -29,7 +29,9 @@ yacc -d SemanticAnalyzer.y && lex LexicalAnalyzer.l
 gcc lex.yy.c y.tab.c -ll -ly
 ./a.out
 
+
 ### Group Members:
+
 Ritvik 2020A7PS1723H
 
 Abhinav Tyagi 2020A7PS2043H
