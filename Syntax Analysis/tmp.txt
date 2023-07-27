@@ -1,0 +1,200 @@
+program         : functions main '(' ')' '{' statements '}'
+                ;
+
+statements      : statement statements
+                | 
+                ;
+
+datatype        : INT
+                | FLOAT
+                | CHAR
+                ;
+
+primitive_literal       : integer_literal
+                        | DECIMAL
+                        ;
+
+integer_literal         : INTEGER
+                        | CHARACTER
+                        ;
+
+literal         : primitive_literal
+                | STRING
+                ;
+
+functions       : function functions
+                | 
+                ;
+
+function        : datatype IDENTIFIER '(' formal_parameters ')' '{' statements '}'
+                | IDENTIFIER '(' formal_parameters ')' '{' statements '}'
+                ;
+
+formal_parameters       : formal_parameter ',' formal_parameters
+                        | formal_parameter
+                        | 
+                        ;
+
+formal_parameter        : datatype variable
+                        ;
+
+actual_parameters       : variable ',' actual_parameters
+                        | variable
+                        | 
+                        ;
+
+main    : datatype MAIN
+        | MAIN
+        ;
+
+variable        : IDENTIFIER
+                | MAIN
+                | PRINTF
+                | array_access
+                ;
+
+array_access    : IDENTIFIER '[' expression ']'
+                | IDENTIFIER '[' expression ']' '[' expression ']'
+
+statement       : if
+                | non_if
+                ;
+
+non_if  : expression ';'
+        | assignment
+        | declaration
+        | switch
+        | looping
+        | compound
+        | printf
+        | function_call ';'
+        | jump
+        | return 
+        ;
+
+
+printf  : PRINTF '(' STRING ')' ';'
+        | PRINTF '(' STRING ',' actual_parameters ')' ';'
+        ;
+
+compound        : '{' statements '}'
+                ;
+
+function_call   : IDENTIFIER '(' actual_parameters ')'
+                ;
+
+jump    : BREAK ';'
+        | CONTINUE ';'
+        ;
+
+return  : RETURN operand ';'
+        | RETURN STRING ';'
+        | RETURN expression ';'
+        | RETURN ';'
+        ;
+
+looping         : while
+                | for
+                ;
+
+declaration     : datatype declaration_list ';'
+                ;
+
+declaration_list        : array_declaration ',' declaration_list
+                        | non_array_declaration ',' declaration_list
+                        | array_declaration
+                        | non_array_declaration
+                        ;
+
+array_declaration       : array_access
+                        | IDENTIFIER '[' expression ']' '=' '{' value_list '}'
+                        | IDENTIFIER '[' ']' '=' '{' value_list '}'
+                        | IDENTIFIER '[' expression ']' '[' expression ']' '=' '{' value_list '}'
+                        | IDENTIFIER '[' ']' '[' expression ']' '=' '{' value_list '}'
+                        | IDENTIFIER '[' expression ']' '[' expression ']' '=' '{' value_block '}'
+                        | IDENTIFIER '[' ']' '[' expression ']' '=' '{' value_block '}'
+                        | IDENTIFIER '[' expression ']' '=' STRING 
+                        | IDENTIFIER '[' ']' '=' STRING 
+                        ;
+
+value_list      : primitive_literal
+                | primitive_literal ',' value_list
+                ;
+
+value_block     : '{' value_list '}'
+                | '{' value_list '}' ',' value_block
+                ;
+
+non_array_declaration   : IDENTIFIER
+                        | IDENTIFIER '=' expression
+                        ;
+
+
+                ;
+
+operator        : '+'
+                | '-'
+                | '*'
+                | '/'
+                | '%'
+                | '<'
+                | '>'
+                | EQ
+                | NE
+                | GE
+                | LE
+                | AND
+                | OR
+                ;
+
+expression      : '!' expression
+                | expression '+' expression
+                | expression '-' expression
+                | expression '*' expression
+                | expression '/' expression
+                | expression '%' expression
+                | expression '<' expression
+                | expression '>' expression
+                | expression EQ expression
+                | expression NE expression
+                | expression GE expression
+                | expression LE expression
+                | expression AND expression
+                | expression OR expression
+                | operand
+                | '(' expression ')'
+                ;
+
+operand         : variable
+                | function_call
+                | primitive_literal
+                ;
+
+assignment      : variable '=' expression ';'
+                ;
+
+loop_expression         : expression
+                        | assignment
+                        | 
+                        ;
+
+for     : FOR '(' loop_expression ';' loop_expression ';' loop_expression ')' statement
+        | FOR '(' declaration ';' expression ';' expression ')' statement
+        ;
+
+while   : WHILE '(' loop_expression ')' statement
+        ;
+
+switch  : SWITCH '(' expression ')' '{' cases '}'
+        ;
+
+cases   : case cases
+        ;
+
+case    : CASE integer_literal ':' statement
+        | DEFAULT ':' statement
+        ;
+
+if      : IF '(' expression ')' statement
+        | IF '(' expression ')' statement ELSE statement
+        ;

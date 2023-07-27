@@ -1,0 +1,9 @@
+
+int random() {
+    return (a+b);
+}
+
+int main() {
+    if(3<1) 2+3; else 1+2;
+    int a = 5;
+}
