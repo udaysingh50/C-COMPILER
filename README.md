@@ -1,5 +1,5 @@
-COMPILER-CONSTRUCTION COURSE
-BASIC C COMPILER
+## COMPILER-CONSTRUCTION COURSE
+## BASIC C COMPILER
 
 Run the program:
 Place the code in "code.txt" file in each folder.
@@ -9,22 +9,22 @@ lex LexicalAnalyzer.l
 gcc lex.yy.c
 ./a.out
 
-2. Syntax Analysis
+3. Syntax Analysis
 yacc -d SyntaxAnalyzer.y && lex LexicalAnalyzer.l
 gcc lex.yy.c y.tab.c -ll -ly
 ./a.out
 
-3. Semantic Analysis
+4. Semantic Analysis
 yacc -d SemanticAnalyzer.y && lex LexicalAnalyzer.l
 gcc lex.yy.c y.tab.c -ll -ly
 ./a.out
 
-4. Code Generation
+5. Code Generation
 yacc -d CodeGeneration.y && lex LexicalAnalyzer.l
 gcc lex.yy.c y.tab.c -ll -ly
 ./a.out
 
-5. Final Output
+6. Final Output
 yacc -d SemanticAnalyzer.y && lex LexicalAnalyzer.l
 gcc lex.yy.c y.tab.c -ll -ly
 ./a.out
