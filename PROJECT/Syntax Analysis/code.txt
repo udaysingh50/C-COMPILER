@@ -1,7 +1,0 @@
-int random() {
-    return (a+b);
-}
-
-int main() {
-    a = a/1;
-}
